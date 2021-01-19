@@ -195,5 +195,7 @@ gaps inner 10
 gaps outer 5
 smart_gaps on
 
+new_window 1pixel
+
 
 exec compton

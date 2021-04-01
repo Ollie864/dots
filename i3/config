@@ -236,7 +236,10 @@ smart_gaps on
 #Gets rid of window bar
 new_window 1pixel
 
-
 exec compton
 
 exec "setxkbmap -layout gb"
+
+#starts autotiling needs https://github.com/olemartinorg/i3-alternating-layout.git
+
+exec --no-startup-id /home/ollie/.config/i3/alternating_layouts.py

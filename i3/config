@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 12
+font pango:monospace 14
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -47,8 +47,17 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id dmenu_run -nb '#4c566a' -sf '#434c5e' -sb '#5e81ac' -nf '#81a1c1' 
- 
+bindsym $mod+Shift+d exec --no-startup-id dmenu_run -nb '#4c566a' -sf '#434c5e' -sb '#5e81ac' -nf '#d8dee9' 
+#stars j4-dmenu-desktop (needed from the aur)
+#bindsym $mod+d exec --no-startup-id j4-dmenu-desktop #-nb '#4c566a' -sf '#434c5e' -sb '#5e81ac' -nf '#d8dee9' 
+#Drop down version (with colour)
+bindsym $mod+d exec --no-startup-id j4-dmenu-desktop --dmenu="dmenu -i -fn 'fira-10' -l 10 -nb '#3b4252' -sf '#e5e9f0' -sb '#4c566a'"
+
+
+
+
+
+
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -56,10 +65,10 @@ bindsym $mod+d exec --no-startup-id dmenu_run -nb '#4c566a' -sf '#434c5e' -sb '#
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -68,10 +77,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -80,7 +89,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+Shift+v split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -172,10 +181,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -197,33 +206,33 @@ bindsym $mod+r mode "resize"
 
 #colours
 
-set $bg-color 	         #2e3440
+set $bg-color 	         #4c566a
 set $inactive-bg-color   #3b4252
-set $text-color          #5e81ac
+set $text-color          #d8dee9
 set $inactive-text-color #5e81ac
 set $urgent-bg-color     #81a1c1
 
 #window colours
 #                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          #88c0d0
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #88c0d0
+client.focused          $bg-color           $bg-color          $text-color          #4c566a
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color #434c5e
 client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color #88c0d0
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #88c0d0
 
 hide_edge_borders both
 
-bar {
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	position top
-	colors {
-		background $bg-color
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
-}
+#bar {
+#        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#	position top
+#	colors {
+#		background $bg-color
+#	    	separator #757575
+#		#                  border             background         text
+#		focused_workspace  $bg-color          $bg-color          $text-color
+#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+#	}
+#}
 
 #Wallpaper
 exec --no-startup-id nitrogen --restore
@@ -236,9 +245,15 @@ smart_gaps on
 #Gets rid of window bar
 new_window 1pixel
 
+
 exec compton
 
 exec "setxkbmap -layout gb"
+
+#starts polybar
+
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 
 #starts autotiling needs https://github.com/olemartinorg/i3-alternating-layout.git
 
